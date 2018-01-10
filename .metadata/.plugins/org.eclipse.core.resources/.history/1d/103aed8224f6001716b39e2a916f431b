@@ -1,0 +1,15 @@
+angular.module('authModule')
+.component('register', {
+	templateUrl : 'app/authModule/register/register.component.html',
+	controllerAs : 'vm',
+	controller : function() {
+		var vm = this;
+		
+		vm.registerUser = function(user) {
+			if (user.password === user.confirm) {
+				console.log(user)
+			}
+			console.log(user);
+		}
+	}
+})

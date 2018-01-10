@@ -2,13 +2,33 @@
 <html ng-app="appModule">
 <head>
   <title>Todo</title>
+  
+  <!-- Angular Stuff -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-cookies.min.js"></script>
+  
+  <!-- Auth Module Stuff -->
+  <script src="app/authModule/auth.module.js"></script>
+  <script src="app/authModule/register/register.component.js"></script>
+  <script src="app/authModule/login/login.component.js"></script>
+  <script src="app/authModule/logout/logout.component.js"></script>
+  <script src="app/authModule/auth.service.js"></script>
+  
+  <!-- App Module Stuff -->
   <script src="app/appModule/app.module.js"></script>
-  <script src="app/appModule/todoList/todoList.component.js"></script>
   <script src="app/appModule/todo.service.js"></script>
+  <script src="app/appModule/incomplete.filter.js"></script>
+  <script src="app/appModule/todoList/todoList.component.js"></script>
+  <script src="app/appModule/home/home.component.js"></script>
+  <script src="app/appModule/about/about.component.js"></script>
+  <script src="app/appModule/contact/contact.component.js"></script>
+  <script src="app/appModule/navigation/navigation.component.js"></script>
+  <script src="app/appModule/notFound/notFound.component.js"></script>
 <script>"undefined"==typeof CODE_LIVE&&(!function(e){var t={nonSecure:"55012",secure:"55014"},c={nonSecure:"http://",secure:"https://"},r={nonSecure:"127.0.0.1",secure:"gapdebug.local.genuitec.com"},n="https:"===window.location.protocol?"secure":"nonSecure";script=e.createElement("script"),script.type="text/javascript",script.async=!0,script.src=c[n]+r[n]+":"+t[n]+"/codelive-assets/bundle.js",e.getElementsByTagName("head")[0].appendChild(script)}(document),CODE_LIVE=!0);</script></head>
 <body data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-1" data-genuitec-path="/MVCProject/WebContent/index.html">
-  
-  <todo-list data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-1" data-genuitec-path="/MVCProject/WebContent/index.html">Loading..</todo-list>
+	<h1 data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-1" data-genuitec-path="/MVCProject/WebContent/index.html">INDEX PAGE</h1>
+	<navigation></navigation>
+	<ng-view></ng-view>
 </body>
 </html>

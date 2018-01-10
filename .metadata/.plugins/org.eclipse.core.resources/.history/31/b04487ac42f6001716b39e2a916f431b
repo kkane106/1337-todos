@@ -1,0 +1,40 @@
+angular.module('authModule')
+.factory('authService', function($http, $cookies, $location) {
+	var service = {};
+	
+	service.getToken = function() {
+		var user = {};
+		user.id = $cookies.get('uid');
+		return user;
+	}
+	
+	service.register = function(user) {
+		return $http({
+			method : 'POST',
+			url : 'rest/auth/register',
+			headers :  {
+				'Content-Type' : 'application/json'
+			},
+			data : user
+		})
+		.then(function(response) {
+			console.log(response)
+			console.log(response.data)
+			$cookies.put('uid', response.data.id);
+		})
+		.catch(console.error)
+	}
+	
+	service.login = function(user) {
+		return $http({
+			url : 'rest/auth/login',
+			method : 'POST',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			data : user
+		})
+	}
+	
+	return service;
+})

@@ -1,0 +1,28 @@
+package test;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import org.junit.After;
+import org.junit.Before;
+
+public class EntityTest {
+	
+	private EntityManagerFactory emf = null;
+	
+	private EntityManager em = null;
+	
+	@Before
+	public void set_up() { 
+		emf = Persistence.createEntityManagerFactory("YourPU");
+		em = emf.createEntityManager();
+	}
+	
+	@After
+	public void tear_down() { 
+		em.close();
+		emf.close();
+	}
+
+}

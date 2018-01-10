@@ -1,64 +1,92 @@
 angular.module('appModule')
-.factory('todoService', function($http) {
+.factory('todoService', function($http, $filter, authService, $location) {
 	var service = {};
-		
-	var todos = [
-        {
-          id : 1,
-          task : 'Go round mums',
-          description : '',
-          completed : true
-        },
-        {
-          id : 2,
-          task : 'Get Liz back',
-          description : '',
-          completed : false
-        },
-        {
-          id : 3,
-          task : 'Sort life out',
-          description : '',
-          completed :  false
-        }
-      ];
 	
-	var generateId = function() {
-		return todos[todos.length-1].id + 1;
+	var checkLogin = function() {
+		var user = authService.getToken();
+		if (!user.id) {
+			$location.path('/login')
+			return;
+		}
+		return user;
 	}
 	
 	service.index = function() {
+		var user = checkLogin();
+		
+		if (!user) return;
+		
 		return $http({
-			url: 'https://nameless-depths-81017.herokuapp.com/todos',
-			method : 'GET'
-		})
-//		return todos;
-	}
-	
-	service.create = function(todo) {
-		var todo = angular.copy(todo);
-		todo.id = generateId();
-		todo.description = '';
-		todo.completed = false;
-		todos.push(todo);
-	}
-	
-	service.update = function(edittedTodo) {
-		todos.forEach(function(todo, idx, array) {
-			if (todo.id === edittedTodo.id) {
-				array.splice(idx, 1, edittedTodo);
-			}
+			method : 'GET',
+			url : 'rest/user/' + user.id + '/todo'
 		});
 	}
 	
+	service.create = function(todo) {
+		var user = checkLogin();
+		
+		if (!user) return;
+		return $http({
+			method : 'POST',
+			url : 'rest/user/' + user.id + '/todo',
+			header : {
+				'Content-Type' : 'application/json'
+			},
+			data : todo
+		})
+	}
+	
+	service.update = function(edittedTodo) {
+		var user = checkLogin();
+		
+		if (!user) return;
+		if (edittedTodo.completed && !edittedTodo.completeDate) {
+			edittedTodo.completeDate = $filter('date')(Date.now(), 'MM/dd/yyyy');
+		}
+		if (!edittedTodo.completed && edittedTodo.completeDate) {
+			edittedTodo.completeDate = "";
+		}
+		
+		return $http({
+			method : 'PUT',
+			url : 'rest/user/'+ user.id +'/todo/' + edittedTodo.id,
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			data : edittedTodo
+		})
+	}
+	
 	service.destroy = function(id) {
-		todos.forEach(function(todo, idx, array) {
-			if (todo.id === id) {
-				array.splice(idx, 1);
-			}
+		var user = checkLogin();
+		
+		if (!user) return;
+		return $http({
+			method : 'DELETE',
+			url : 'rest/user/'+ user.id +'/todo/' + id
+		})
+	}
+	
+	service.show = function(id) {
+		var user = checkLogin();
+		
+		if (!user) return;
+		return $http({
+			method : 'GET',
+			url : 'rest/user/'+ user.id +'/todo/' + id
 		})
 	}
 	
 	return service;
 })
+
+
+
+
+
+
+
+
+
+
 

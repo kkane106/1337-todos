@@ -1,0 +1,8 @@
+angular.module('appModule')
+.filter('incomplete', function() {
+	return function(todos) {
+		return todos.filter(function(todo) {
+			return !todo.completed;
+		})
+	}
+})

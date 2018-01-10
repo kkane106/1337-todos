@@ -1,0 +1,67 @@
+angular.module('appModule')
+.factory('todoService', function($http, $filter) {
+	var service = {};
+	
+	service.index = function() {
+		return $http({
+			method : 'GET',
+			url : 'rest/user/1/todo'
+		});
+	}
+	
+	service.create = function(todo) {
+		return $http({
+			method : 'POST',
+			url : 'rest/user/1/todo',
+			header : {
+				'Content-Type' : 'application/json'
+			},
+			data : todo
+		})
+	}
+	
+	service.update = function(edittedTodo) {
+		if (edittedTodo.completed && !edittedTodo.completeDate) {
+			edittedTodo.completeDate = $filter('date')(Date.now(), 'MM/dd/yyyy');
+		}
+		if (!edittedTodo.completed && edittedTodo.completeDate) {
+			edittedTodo.completeDate = "";
+		}
+		
+		return $http({
+			method : 'PUT',
+			url : 'rest/user/1/todo/' + edittedTodo.id,
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			data : edittedTodo
+		})
+	}
+	
+	service.destroy = function(id) {
+		return $http({
+			method : 'DELETE',
+			url : 'rest/user/1/todo/' + id
+		})
+	}
+	
+	service.show = function(id) {
+		return $http({
+			method : 'GET',
+			url : 'rest/user/1/todo/' + id
+		})
+	}
+	
+	return service;
+})
+
+
+
+
+
+
+
+
+
+
+

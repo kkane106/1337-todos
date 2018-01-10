@@ -9,6 +9,10 @@
 
 	<context:component-scan base-package="controllers, data" />
 
+	<!-- bcrypt bean -->
+	<bean id="bCryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
 	<bean id="myEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="YourPU" />
@@ -17,6 +21,14 @@
 	<bean id="myTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="myEntityManagerFactory" />
 	</bean>
+	
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/*/todo/**"/>
+			<bean id="myInterceptor" class="security.DataSecurityInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>	
 
 	<tx:annotation-driven transaction-manager="myTransactionManager" />
 	<mvc:annotation-driven />

@@ -1,0 +1,6 @@
+<h1>Register</h1>
+<form>
+	<input type="email" />
+	<input type="password" />
+	<input type="submit" value="register" />
+</form>

@@ -1,0 +1,23 @@
+angular.module('appModule')
+.factory('todoService', function($http) {
+	var service = {};
+	
+	service.index = function() {
+		// TODO : Implement
+	}
+	
+	service.create = function(todo) {
+		// TODO : Implement
+	}
+	
+	service.update = function(edittedTodo) {
+		// TODO : Implement
+	}
+	
+	service.destroy = function(id) {
+		// TODO : Implement
+	}
+	
+	return service;
+})
+

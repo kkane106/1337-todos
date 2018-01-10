@@ -1,0 +1,74 @@
+<style>
+.todo-count-label {
+	background : green;
+	border-radius : 10px;
+	padding-left : 5px;
+	padding-right : 5px;
+	color : #fff;
+}
+
+.red {
+	color : #fff;
+	background : red;
+	border : none;
+	border-radius : 5px;
+}
+</style>
+
+<h1>NgTodo : <span class="todo-count-label"><em>{{vm.countTodos()}}</em></span></h1>
+
+<form ng-hide="vm.selected">
+	<input type="text" ng-model="todo.task" placeholder="New Task" />
+	<input type="submit" value="Add Todo" ng-click="vm.addTodo(todo); todo = {};" />
+</form>
+
+Show completed: <input type="checkbox" ng-model="vm.showComplete" />
+
+<table ng-hide="vm.selected">
+	<thead>
+		<tr>
+			<th>Task</th>
+			<th>Mark</th>
+			<th>Completed</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="todo in vm.todos | incomplete | orderBy:'id'">
+			<td ng-click="vm.displayTodo(todo)">{{todo.task}}</td>
+			<td>
+				<input type="checkbox" ng-model="todo.completed" ng-change="vm.updateTodo(todo)" />
+			</td>
+			<td>{{todo.completed}}</td>
+			<td>
+				<button class="red" ng-click="vm.deleteTodo(todo.id)">X</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div ng-show="vm.selected && !vm.editTodo">
+	<div>Id : {{vm.selected.id}}</div>
+	<div>Task : {{vm.selected.task}}</div>
+	<div>Desc : {{vm.selected.description}}</div>
+	<div>Comp : {{vm.selected.completed}}</div>
+	<button ng-click="vm.setEditTodo()">Edit</button>
+	
+	<button ng-click="vm.displayTable()">Go Back</button>
+</div>
+
+
+<form ng-show="vm.editTodo">
+	Task : <input type="text" ng-model="vm.editTodo.task" placeholder="Task" /><br />
+	Desc : <input type="text" ng-model="vm.editTodo.description" placeholder="Description" /><br />
+	Completed : <input type="checkbox" ng-model="vm.editTodo.completed" /><br />
+	<input type="submit" value="Cancel" ng-click="vm.editTodo = null" /><br />
+	<input type="submit" value="Save" ng-click="vm.updateTodo(vm.editTodo)" />
+</form>
+
+
+
+
+
+
+
+

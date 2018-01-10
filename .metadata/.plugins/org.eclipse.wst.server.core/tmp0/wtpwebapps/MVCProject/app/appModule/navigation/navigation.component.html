@@ -1,0 +1,10 @@
+<h3 data-genuitec-lp-enabled="false" data-genuitec-file-id="wc1-5" data-genuitec-path="/MVCProject/WebContent/app/appModule/navigation/navigation.component.html">Navigation For App</h3>
+<ul>
+	<li><a href="#/">Home</a></li>
+	<li><a href="#/about">about</a></li>
+	<li><a href="#/contact">contact</a></li>
+	<li><a href="#/todo">todo</a></li>
+	<li ng-hide="vm.checkLogin()"><a href="#/register">register</a></li>
+	<li ng-hide="vm.checkLogin()"><a href="#/login">login</a></li>
+	<li ng-show="vm.checkLogin()"><logout></logout></li>
+</ul>

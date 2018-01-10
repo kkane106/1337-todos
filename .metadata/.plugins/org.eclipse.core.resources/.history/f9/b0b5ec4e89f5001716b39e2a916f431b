@@ -1,0 +1,29 @@
+package data;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import entities.User;
+
+@Repository
+@Transactional
+public class AuthDAOImpl implements AuthDAO {
+	
+	@Autowired
+	private PasswordEncoder encoder;
+
+	@Override
+	public User register(User u) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User login(User u) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

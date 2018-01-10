@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="appModule">
+<head>
+  <title>Todo</title>
+  
+  <!-- Angular Stuff -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-cookies.min.js"></script>
+  
+  <!-- Auth Module Stuff -->
+  <script src="app/authModule/auth.module.js"></script>
+  <script src="app/authModule/register/register.component.js"></script>
+  <script src="app/authModule/auth.service.js"></script>
+  
+  <!-- App Module Stuff -->
+  <script src="app/appModule/app.module.js"></script>
+  <script src="app/appModule/todo.service.js"></script>
+  <script src="app/appModule/incomplete.filter.js"></script>
+  <script src="app/appModule/todoList/todoList.component.js"></script>
+  <script src="app/appModule/home/home.component.js"></script>
+  <script src="app/appModule/about/about.component.js"></script>
+  <script src="app/appModule/contact/contact.component.js"></script>
+  <script src="app/appModule/navigation/navigation.component.js"></script>
+  <script src="app/appModule/notFound/notFound.component.js"></script>
+</head>
+<body>
+	<h1>INDEX PAGE</h1>
+	<navigation></navigation>
+	<ng-view></ng-view>
+  <!-- <todo-list>Loading..</todo-list> -->
+</body>
+</html>

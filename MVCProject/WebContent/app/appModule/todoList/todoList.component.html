@@ -1,6 +1,5 @@
 <style>
 .todo-count-label {
-	background : green;
 	border-radius : 10px;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -13,14 +12,36 @@
 	border : none;
 	border-radius : 5px;
 }
+
+
+.danger {
+	background : red;
+}
+
+.warn {
+	background : yellow;
+}
+
+.success {
+	background : green;
+}
+
+.strike {
+	text-decoration : line-through;
+	color : #838383;
+}
 </style>
 
-<h1>NgTodo : <span class="todo-count-label"><em>{{vm.countTodos()}}</em></span></h1>
+<h1 ng-show="vm.message">{{vm.message}}</h1>
+
+<h1>NgTodo : <span ng-class="vm.warnUser()" class="todo-count-label"><em>{{vm.countTodos()}}</em></span></h1>
 
 <form ng-hide="vm.selected">
 	<input type="text" ng-model="todo.task" placeholder="New Task" />
 	<input type="submit" value="Add Todo" ng-click="vm.addTodo(todo); todo = {};" />
 </form>
+
+Show completed: <input type="checkbox" ng-model="vm.showComplete" />
 
 <table ng-hide="vm.selected">
 	<thead>
@@ -31,10 +52,10 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="todo in vm.todos">
-			<td ng-click="vm.displayTodo(todo)">{{todo.task}}</td>
+		<tr ng-repeat="todo in vm.todos | incomplete:vm.showComplete | orderBy:'id'">
+			<td ng-class="vm.crossOut(todo.completed)" ng-click="vm.displayTodo(todo)">{{todo.task}}</td>
 			<td>
-				<input type="checkbox" ng-model="todo.completed" />
+				<input type="checkbox" ng-model="todo.completed" ng-change="vm.updateTodo(todo)" />
 			</td>
 			<td>{{todo.completed}}</td>
 			<td>

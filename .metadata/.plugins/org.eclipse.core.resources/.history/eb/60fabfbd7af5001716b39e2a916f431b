@@ -1,0 +1,23 @@
+angular.module('appModule', ['ngRoute'])
+.config(function($routeProvider) {
+
+	$routeProvider
+		.when('/', {
+			template : '<home></home>'
+		})
+		.when('/about', {
+			template : '<about></about>'
+		})
+		.when('/contact', {
+			template : '<contact></contact>'
+		})
+		.when('/todo', {
+			template : '<todo-list></todo-list>'
+		})
+		.when('/todo/:todoId/:message', {
+			template : '<todo-list></todo-list>'
+		})
+		.otherwise({
+			template : '<not-found></not-found>'
+		})
+})

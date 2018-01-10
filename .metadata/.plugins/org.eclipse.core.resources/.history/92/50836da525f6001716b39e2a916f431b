@@ -1,0 +1,11 @@
+angular.module('authModule')
+.factory('authService', function($http, $cookies, $location) {
+	var service = {};
+	
+	service.register = function(user) {
+		delete user.confirm;
+		console.log("SERVICE",user);
+	}
+	
+	return service;
+})

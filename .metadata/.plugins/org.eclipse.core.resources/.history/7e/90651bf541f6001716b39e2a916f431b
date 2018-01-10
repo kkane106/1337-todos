@@ -1,0 +1,8 @@
+angular.module('authModule')
+.component('login', {
+	templateUrl : 'app/authModule/login/login.component.html',
+	controllerAs : 'vm',
+	controller : function() {
+		
+	}
+})
